@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Code Review Assistant</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
+}
+
+h1 {
+  color: #333;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+textarea {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#output {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #333;
+  text-align: left;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  white-space: pre-wrap; 
+}
+
+</style>
+<body>
+  <h1>AI Code Review Assistant</h1>
+  <div class="container">
+    <textarea id="codeInput" placeholder="Paste your code here..."></textarea>
+    <button onclick="reviewCode()">Review Code</button>
+    <div id="output"></div>
+  </div>
+  <script>
+    function reviewCode() {
+  const codeInput = document.getElementById("codeInput").value;
+  const output = document.getElementById("output");
+
+  if (!codeInput.trim()) {
+    output.textContent = "Please paste some code for review.";
+    return;
+  }
+
+  let feedback = "AI Code Review Feedback:\n\n";
+
+  if (codeInput.includes("var ")) {
+    feedback += "- Avoid using 'var', prefer 'let' or 'const' for variable declarations.\n";
+  }
+  if (codeInput.length > 500) {
+    feedback += "- The code is quite lengthy. Consider breaking it into smaller functions for better readability.\n";
+  }
+  if (!codeInput.includes("function")) {
+    feedback += "- Your code does not include any functions. Consider modularizing your code into reusable functions.\n";
+  }
+
+  if (feedback === "AI Code Review Feedback:\n\n") {
+    feedback += "Your code looks great! No issues detected.";
+  }
+
+
+  output.textContent = feedback;
+}
+
+  </script>
+</body>
+</html>
